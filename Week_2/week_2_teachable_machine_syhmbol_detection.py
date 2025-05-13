@@ -3,7 +3,6 @@ import numpy as np
 from picamera2 import Picamera2
 import tflite_runtime.interpreter as tflite
 
-# === Load the model ===
 
 interpreter = tflite.Interpreter(model_path="/home/pi/Desktop/week3.tflite")
 interpreter.allocate_tensors()
@@ -14,7 +13,6 @@ output_details = interpreter.get_output_details()
 with open("/home/pi/Desktop/week3.txt", "r") as f:
     class_names = [line.strip() for line in f.readlines()]
 
-# === Initialize Pi Camera ===
 picam2 = Picamera2()
 picam2.configure(picam2.create_preview_configuration(main={"format": "RGB888", "size": (224, 224)}))
 picam2.start()
