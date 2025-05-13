@@ -3,8 +3,6 @@ import os
 from picamera2 import Picamera2
 import time
 
-# === CHANGE THIS to the shape/arrow you're capturing ===
-# === 1) Create a folder inside /home/pi/Desktop/dataset/ for this class ===
 
 symbol_name = "triangle"
 
