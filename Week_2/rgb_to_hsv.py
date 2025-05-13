@@ -3,7 +3,7 @@ import numpy as np
 import time
 from picamera2 import Picamera2
 
-# ===== CAMERA SETUP =====
+
 FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 
