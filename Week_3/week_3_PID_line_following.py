@@ -4,7 +4,6 @@ import time
 import RPi.GPIO as GPIO
 from picamera2 import Picamera2
 
-# ===== GPIO MOTOR SETUP =====
 GPIO.setmode(GPIO.BOARD)
 IN1, IN2, IN3, IN4 = 11, 12, 15, 16
 ENA, ENB = 32, 33
@@ -51,7 +50,6 @@ def stop():
     GPIO.output(IN3, GPIO.LOW)
     GPIO.output(IN4, GPIO.LOW)
 
-# ===== PID CONFIGURATION =====
 Kp = 0.45
 Ki = 0.0006
 Kd = 0.02
@@ -60,7 +58,7 @@ last_error = 0
 integral = 0
 last_direction = "left"  # Direction before line lost
 
-# ===== CAMERA SETUP =====
+
 FRAME_WIDTH = 320
 FRAME_HEIGHT = 240
 
@@ -71,7 +69,7 @@ picam2.configure("preview")
 picam2.start()
 time.sleep(2)
 
-# ===== PATH TRACE MASK =====
+
 path_mask = np.zeros((FRAME_HEIGHT, FRAME_WIDTH, 3), dtype=np.uint8)
 
 try:
