@@ -140,7 +140,7 @@ try:
                 last_direction = "left" if error > 0 else "right"
 
                 if abs(error) > 90:
-                    print(f"âš  Sharp Turn [{selected_color.upper()}]")
+                    print(f"Sharp Turn [{selected_color.upper()}]")
                     if error > 0:
                         left_pivot()
                     else:
