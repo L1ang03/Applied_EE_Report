@@ -6,7 +6,6 @@ import RPi.GPIO as GPIO
 import tflite_runtime.interpreter as tflite
 from picamera2 import Picamera2
 
-# ========= GPIO MOTOR SETUP =========
 GPIO.setmode(GPIO.BOARD)
 IN1, IN2, IN3, IN4 = 11, 12, 15, 16
 ENA, ENB = 32, 33
@@ -52,12 +51,10 @@ def stop():
     GPIO.output(IN3, GPIO.LOW)
     GPIO.output(IN4, GPIO.LOW)
 
-# ========= PID CONFIG =========
 Kp, Ki, Kd = 0.45, 0.0006, 0.02
 last_error, integral = 0, 0
 last_direction = "left"
 
-# ===== Teachable Machine Model =====
 interpreter = tflite.Interpreter(model_path="/home/pi/Desktop/tensor/week3.tflite")
 interpreter.allocate_tensors()
 input_details  = interpreter.get_input_details()
@@ -70,7 +67,6 @@ CONF_THRESHOLD = 0.55
 DEBOUNCE_MS    = 1000
 last_stop_time = 0
 
-# ========= CAMERA SETUP =========
 FRAME_WIDTH, FRAME_HEIGHT = 320, 240
 picam2 = Picamera2()
 picam2.preview_configuration.main.size   = (FRAME_WIDTH, FRAME_HEIGHT)
@@ -79,20 +75,17 @@ picam2.configure("preview")
 picam2.start()
 time.sleep(2)
 
-# ========= PATH TRACE MASK =========
 path_mask = np.zeros((FRAME_HEIGHT, FRAME_WIDTH, 3), dtype=np.uint8)
 
-# ========= ASSIGNED COLORS =========
 assigned_colors = ['red', 'blue']
 
-print("✅ Robot running — press q to quit.")
+print("Robot running — press q to quit.")
 
 try:
     while True:
         frame = picam2.capture_array()
         now_ms = int(time.time()*1000)
 
-        # --- 1. Symbol detection on upper ROI ---
         
         sym_roi = frame[0:int(FRAME_HEIGHT*0.6), :]
         inp = cv2.resize(sym_roi, (224, 224)).astype('float32') / 255.0
@@ -126,7 +119,6 @@ try:
             forward()
             time.sleep(0.8)
 
-        # --- 2. Line following on lower ROI ---
         roi = frame[100:240, :]
         hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
         masks = {}
