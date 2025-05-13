@@ -106,7 +106,7 @@ try:
 
                 # Sharp turn mode
                 if abs(error) > 90:
-                    print("âš  Sharp U-Turn Activated")
+                    print("Sharp U-Turn Activated")
                     if error > 0:
                         left_pivot()
                     else:
@@ -120,7 +120,7 @@ try:
                     left_speed = max(0, min(100, base_speed - output))
                     right_speed = max(0, min(100, base_speed + output))
 
-                    print(f"âœ… Tracking: Error={error}, L={int(left_speed)} R={int(right_speed)}")
+                    print(f"Tracking: Error={error}, L={int(left_speed)} R={int(right_speed)}")
                     forward()
                     set_motor_speed(left_speed, right_speed)
 
